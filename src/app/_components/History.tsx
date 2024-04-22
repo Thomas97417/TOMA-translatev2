@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { HistoryEntry, languageOptions, useStore } from "@/utils/StateManager";
+import { decode } from "he";
 import { Trash2 } from "lucide-react";
 
 export default function History() {
@@ -46,7 +47,7 @@ export default function History() {
     setTranslationHistory([]);
   };
   return (
-    <div>
+    <>
       <p className="text-2xl font-semibold mb-6">Historique des traductions</p>
 
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 mb-12 w-full">
@@ -55,8 +56,7 @@ export default function History() {
             return (
               <Card
                 className="py-2 shadow-md relative h-auto"
-                // key={`${entry.input}` + `${Date.now()}`}
-                key={`${entry.input}-${entry.source}-${entry.target}-${index}`}
+                key={`${entry.input}-${entry.source}-${entry.target}`}
               >
                 <CardContent className="mb-8">
                   <span className="text-base font-semibold">
@@ -69,8 +69,10 @@ export default function History() {
                   </span>
                   <span
                     className="line-clamp-2"
-                    dangerouslySetInnerHTML={{ __html: entry.output }}
-                  />
+                    // dangerouslySetInnerHTML={{ __html: entry.output }}
+                  >
+                    {decode(entry.output)}
+                  </span>
                 </CardContent>
                 <CardFooter>
                   <Button
@@ -81,6 +83,7 @@ export default function History() {
                   </Button>
                 </CardFooter>
               </Card>
+              // <p key={index}>oui</p>
             );
           })
         ) : (
@@ -100,6 +103,6 @@ export default function History() {
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 }

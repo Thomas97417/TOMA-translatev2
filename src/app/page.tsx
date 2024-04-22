@@ -1,10 +1,10 @@
 "use client";
 
 import { useStore } from "@/utils/StateManager";
-import { Moon } from "lucide-react";
 import { useEffect } from "react";
 import History from "./_components/History";
 import InputTranslate from "./_components/InputTranslate";
+import { ModeToggle } from "./_components/ModeToggle";
 import OutputTranslate from "./_components/OutputTranslate";
 import { Section } from "./_components/Section";
 import { Spacing } from "./_components/Spacing";
@@ -40,7 +40,8 @@ const TranslatePage = () => {
         <div className="flex w-full justify-between items-center">
           <p className="font-bold text-2xl my-8 ml-6">TOMA Translate</p>
           <div className="mr-6 hover:cursor-pointer">
-            <Moon size={24} />
+            {/* <Moon size={24} /> */}
+            <ModeToggle />
           </div>
         </div>
         <Section>

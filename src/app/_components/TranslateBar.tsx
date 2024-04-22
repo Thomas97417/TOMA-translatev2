@@ -1,4 +1,5 @@
 import { languageOptions, useStore } from "@/utils/StateManager";
+import { decode } from "he";
 import MiddleOptions from "./MiddleOptions";
 export default function TranslateBar() {
   const {
@@ -34,7 +35,7 @@ export default function TranslateBar() {
       <MiddleOptions />
       <select
         className="focus:outline-none w-full hover:cursor-pointer font-medium text-base sm:text-lg"
-        value={decodeEntities(targetLanguage)}
+        value={decode(targetLanguage)}
         onChange={(e) => setTargetLanguage(e.target.value)}
       >
         {languageOptions.map((option) => (
