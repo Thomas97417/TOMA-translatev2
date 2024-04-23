@@ -14,7 +14,7 @@ export default function InputTranslate() {
   return (
     <div className="relative w-full">
       <textarea
-        className="h-[300px] md:h-[400px] text-lg w-full py-4 pl-4 pr-10 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="h-[300px] md:h-[400px] text-lg w-full py-4 pl-4 pr-10 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800"
         style={{ resize: "none" }}
         placeholder="Ecrivez ou collez votre texte ici"
         value={inputText}

@@ -11,6 +11,7 @@ import { useState } from "react";
 
 export default function MiddleOptions() {
   const [isTranslating, setIsTranslating] = useState(false);
+  const [hasTranslated, setHasTranslated] = useState(false); // Utilisé pour gérer plusieurs swap d'affilés
   const {
     inputText,
     setInputText,
@@ -32,11 +33,18 @@ export default function MiddleOptions() {
       return;
     }
     console.log(entry);
-
-    setInputText(decode(entry.output));
-    setTranslatedText(decode(entry.input));
-    setLanguageSelection(entry.target);
-    setTargetLanguage(entry.source);
+    if (hasTranslated) {
+      setInputText(decode(entry.output));
+      setTranslatedText(decode(entry.input));
+      setLanguageSelection(entry.target);
+      setTargetLanguage(entry.source);
+      setHasTranslated(false);
+    } else {
+      setInputText(translatedText);
+      setTranslatedText(inputText);
+      setLanguageSelection(targetLanguage);
+      setTargetLanguage(languageSelection);
+    }
   };
 
   const handleTranslate = async () => {
@@ -132,6 +140,7 @@ export default function MiddleOptions() {
       }
     } finally {
       setIsTranslating(false);
+      setHasTranslated(true);
     }
   };
   return (

@@ -1,3 +1,9 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useStore } from "@/utils/StateManager";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { useState } from "react";
@@ -41,7 +47,7 @@ export default function OutputTranslate() {
     <div className="w-full relative">
       <textarea
         style={{ resize: "none" }}
-        className="h-[300px] md:h-[400px] py-4 pl-4 pr-10 text-lg w-full p-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="h-[300px] md:h-[400px] py-4 pl-4 pr-10 text-lg w-full p-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800"
         value={decodeEntities(translatedText)}
         onChange={(e) => setTranslatedText(e.target.value)}
         readOnly={inputText.length === 0 && translatedText.length === 0}
@@ -53,11 +59,20 @@ export default function OutputTranslate() {
             className="absolute bottom-4 right-2 z-100 text-green-500"
           />
         ) : (
-          <Clipboard
-            size={22}
-            onClick={copyToClipboard}
-            className="absolute bottom-4 right-2 z-100 hover:cursor-pointer hover:text-pink-500"
-          />
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Clipboard
+                  size={22}
+                  onClick={copyToClipboard}
+                  className="absolute bottom-4 right-2 z-[100] hover:cursor-pointer hover:text-pink-500"
+                />
+              </TooltipTrigger>
+              <TooltipContent className="mb-8">
+                <p>Copier dans le presse papier</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ))}
     </div>
   );

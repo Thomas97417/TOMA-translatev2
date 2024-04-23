@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { HistoryEntry, languageOptions, useStore } from "@/utils/StateManager";
@@ -55,24 +57,27 @@ export default function History() {
           translationHistory.map((entry, index) => {
             return (
               <Card
-                className="py-2 shadow-md relative h-auto"
-                key={`${entry.input}-${entry.source}-${entry.target}`}
+                className="py-2 shadow-md relative h-auto dark:bg-slate-800"
+                key={`${entry.input}-${entry.source}-${entry.target}-{${index}`}
               >
                 <CardContent className="mb-8">
-                  <span className="text-base font-semibold">
-                    Entrée <span className="text-sm">({entry.source}) </span>:
-                  </span>
-                  <span className="line-clamp-2 text-base">{entry.input}</span>
-                  <span className="text-base font-semibold">
-                    Traduction{" "}
-                    <span className="text-sm">({entry.target}) : </span>
-                  </span>
-                  <span
-                    className="line-clamp-2"
-                    // dangerouslySetInnerHTML={{ __html: entry.output }}
-                  >
-                    {decode(entry.output)}
-                  </span>
+                  <div>
+                    <p className="text-base font-semibold">
+                      Entrée ({entry.source}):
+                    </p>
+                    <span className="line-clamp-2 text-base">
+                      {entry.input}
+                    </span>
+                    <p className="text-base font-semibold">
+                      Traduction ({entry.target}) :
+                    </p>
+                    <span
+                      className="line-clamp-2"
+                      // dangerouslySetInnerHTML={{ __html: entry.output }}
+                    >
+                      {decode(entry.output)}
+                    </span>
+                  </div>
                 </CardContent>
                 <CardFooter>
                   <Button
@@ -83,7 +88,6 @@ export default function History() {
                   </Button>
                 </CardFooter>
               </Card>
-              // <p key={index}>oui</p>
             );
           })
         ) : (
