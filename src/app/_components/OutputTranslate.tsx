@@ -5,6 +5,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useStore } from "@/utils/StateManager";
+import { decode } from "he";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { useState } from "react";
 
@@ -21,7 +22,7 @@ export default function OutputTranslate() {
   const copyToClipboard = () => {
     if (translatedText) {
       navigator.clipboard
-        .writeText(translatedText)
+        .writeText(decode(translatedText))
         .then(() => {
           console.log("Texte copié dans le presse-papiers");
         })
